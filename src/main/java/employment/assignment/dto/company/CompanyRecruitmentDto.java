@@ -1,6 +1,4 @@
-package employment.assignment.dto;
-
-import java.util.ArrayList;
+package employment.assignment.dto.company;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RecruitmentDetailDto {
-    private String companyName;
+public class CompanyRecruitmentDto {
+    private Integer id;
+    private Integer companyId;
     private String country;
     private String region;
     private String position;
     private String reward;
     private String skill;
     private String content;
-    private ArrayList<String> otherRecruitments;
 }

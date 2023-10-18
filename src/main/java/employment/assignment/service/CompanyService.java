@@ -6,9 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import employment.assignment.dto.RecruitmentDto;
 import employment.assignment.dto.ResponseDto;
+import employment.assignment.dto.company.CompanyRecruitmentDto;
+import employment.assignment.entity.CompanyEntity;
 import employment.assignment.entity.RecruitmentEntity;
+import employment.assignment.persistence.CompanyRepository;
 import employment.assignment.persistence.RecruitmentRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -16,12 +18,15 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class CompanyService {
     private final RecruitmentRepository recruitmentRepo;
+    private final CompanyRepository companyRepo;
     private final ResponseDto response;
 
-    public ResponseEntity<?> createRecruitment(RecruitmentDto dto) {
+    public ResponseEntity<?> createRecruitment(CompanyRecruitmentDto dto) {
         try {
+            CompanyEntity company = companyRepo.findById(dto.getCompanyId()).get();
             recruitmentRepo.save(RecruitmentEntity.builder()
-                    .companyName(dto.getCompanyName())
+                    .companyId(dto.getCompanyId())
+                    .companyName(company.getCompanyName())
                     .country(dto.getCountry())
                     .region(dto.getRegion())
                     .position(dto.getPosition())
@@ -35,13 +40,12 @@ public class CompanyService {
         }
     }
 
-    public ResponseEntity<?> updateRecruitment(RecruitmentDto dto) {
+    public ResponseEntity<?> updateRecruitment(CompanyRecruitmentDto dto) {
         Optional<RecruitmentEntity> data = recruitmentRepo.findById(dto.getId());
         if (data.isPresent()) {
             try {
                 recruitmentRepo.save(RecruitmentEntity.builder()
                         .id(dto.getId())
-                        .companyName(dto.getCompanyName())
                         .country(dto.getCountry())
                         .region(dto.getRegion())
                         .position(dto.getPosition())
@@ -57,7 +61,7 @@ public class CompanyService {
         }
     }
 
-    public ResponseEntity<?> deleteRecruitment(RecruitmentDto dto) {
+    public ResponseEntity<?> deleteRecruitment(CompanyRecruitmentDto dto) {
         Optional<RecruitmentEntity> data = recruitmentRepo.findById(dto.getId());
         if (data.isPresent()) {
             try {
