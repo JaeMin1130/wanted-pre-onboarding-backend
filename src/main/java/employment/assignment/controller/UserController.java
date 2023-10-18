@@ -23,21 +23,25 @@ public class UserController {
     private final UserService userService;
     private final ResponseDto response;
 
+    // 4. 채용공고 목록 조회
     @GetMapping("/show")
     public ResponseEntity<?> getRecruitments() {
         return userService.getRecruitments();
     }
 
+    // 5. 채용공고 상세정보 조회
     @GetMapping("/show/detail/{id}")
     public ResponseEntity<?> getDetails(@PathVariable int id) {
         return userService.getDetails(id);
     }
 
+    // 6. 채용공고 검색
     @GetMapping("/search/{text}")
     public ResponseEntity<?> searchRecruitment(@PathVariable String text) {
         return userService.searchRecruitment(text);
     }
 
+    // 7. 채용공고 지원
     @PostMapping("/apply")
     public ResponseEntity<?> applyRecruitment(@RequestBody ApplyDto dto, Errors errors) {
         if (errors.hasErrors()) {

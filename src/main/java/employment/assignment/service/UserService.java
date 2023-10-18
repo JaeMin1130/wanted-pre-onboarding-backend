@@ -26,6 +26,7 @@ public class UserService {
     private final ApplyHistoryRepository applyHistoryRepo;
     private final ResponseDto response;
 
+    // 4. 채용공고 목록 조회
     public ResponseEntity<?> getRecruitments() {
         List<RecruitmentEntity> list = recruitmentRepo.findAll();
         List<UserRecruitmentDto> data = new ArrayList<>();
@@ -43,6 +44,7 @@ public class UserService {
         return response.success(data);
     }
 
+    // 5. 채용공고 상세정보 조회
     public ResponseEntity<?> getDetails(int id) {
         Optional<RecruitmentEntity> option = recruitmentRepo.findById(id);
         if (option.isPresent()) {
@@ -72,6 +74,7 @@ public class UserService {
         }
     }
 
+    // 6. 채용공고 검색
     public ResponseEntity<?> searchRecruitment(String text) {
         List<RecruitmentEntity> list = recruitmentRepo.findAll();
         List<UserRecruitmentDto> data = new ArrayList<>();
@@ -92,6 +95,7 @@ public class UserService {
         return response.success(data);
     }
 
+    // 7. 채용공고 지원
     public ResponseEntity<?> applyRecruitment(ApplyDto dto) {
         try {
             applyHistoryRepo.save(ApplyHistoryEntity.builder()

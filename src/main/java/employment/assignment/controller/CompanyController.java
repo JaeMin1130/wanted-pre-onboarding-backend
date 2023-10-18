@@ -25,6 +25,7 @@ public class CompanyController {
     private final CompanyService CompanyService;
     private final ResponseDto response;
 
+    // 1. 채용공고 등록
     @PostMapping("/create")
     public ResponseEntity<?> createRecruitment(@RequestBody CompanyRecruitmentDto dto, Errors errors)
             throws IOException {
@@ -34,6 +35,7 @@ public class CompanyController {
         return CompanyService.createRecruitment(dto);
     }
 
+    // 2. 채용공고 수정
     @PutMapping("/update")
     public ResponseEntity<?> updateRecruitment(@RequestBody CompanyRecruitmentDto dto, Errors errors)
             throws IOException {
@@ -43,6 +45,7 @@ public class CompanyController {
         return CompanyService.updateRecruitment(dto);
     }
 
+    // 3. 채용공고 삭제
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRecruitment(@RequestBody CompanyRecruitmentDto dto, Errors errors)
             throws IOException {

@@ -21,6 +21,7 @@ public class CompanyService {
     private final CompanyRepository companyRepo;
     private final ResponseDto response;
 
+    // 1. 채용공고 등록
     public ResponseEntity<?> createRecruitment(CompanyRecruitmentDto dto) {
         try {
             CompanyEntity company = companyRepo.findById(dto.getCompanyId()).get();
@@ -40,6 +41,7 @@ public class CompanyService {
         }
     }
 
+    // 2. 채용공고 수정
     public ResponseEntity<?> updateRecruitment(CompanyRecruitmentDto dto) {
         Optional<RecruitmentEntity> data = recruitmentRepo.findById(dto.getId());
         if (data.isPresent()) {
@@ -61,6 +63,7 @@ public class CompanyService {
         }
     }
 
+    // 3. 채용공고 삭제
     public ResponseEntity<?> deleteRecruitment(CompanyRecruitmentDto dto) {
         Optional<RecruitmentEntity> data = recruitmentRepo.findById(dto.getId());
         if (data.isPresent()) {
